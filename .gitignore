@@ -1,2 +1,5 @@
 # private keys
 credentials.py
+
+# folders
+__pycache__
