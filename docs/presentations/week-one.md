@@ -1,5 +1,7 @@
 # Week One
 
+Present research question, data descriptives, analyses or planned analyses.
+
 ## Overview 
 
 1. Capture Twitter data using Twitter API, Tweepy
@@ -7,12 +9,18 @@
 3. Perform Sentimental Analysis
 4. Visual on Dashboard 
 
-## Research Questions
+## Research Question
+
+Can I use Twitter to determine a presidential candidates popularity?
+
+## Planned Analyses
 
 1. Use sentimental analysis to look at potential presidental candidate's popularity.
-2. Potentially use logistic regression and use the sentimental analysis to predict how a state will vote
+2. Potentially use logistic regression and use the sentimental analysis to predict how a state will vote.
 
 ## Data Descriptives
+
+Currently in a json file. Need to move to some dataframe.
 
 ### Raw Data
 
