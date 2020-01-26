@@ -9,6 +9,10 @@ Present research question, data descriptives, analyses or planned analyses.
 3. Perform Sentimental Analysis
 4. Visual on Dashboard 
 
+## Architecture
+
+![Week One Architecture](../week-one.jpg)
+
 ## Research Question
 
 Can I use Twitter to determine a presidential candidates popularity?
