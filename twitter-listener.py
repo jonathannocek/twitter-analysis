@@ -9,7 +9,7 @@ import credentials
 auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
 auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 
-streamName = 'test-stream'
+streamName = 'twitter-stream'
 
 # Authenticate with AWS
 client = boto3.client('firehose', region_name='us-east-1',

@@ -1,21 +1,28 @@
-# Week One
+# Presentation One
 
 Present research question, data descriptives, analyses or planned analyses.
 
-## Overview 
+## Overview
 
-1. Capture Twitter data using Twitter API, Tweepy
-2. Stream, curate, clean and move to landing place
-3. Perform Sentimental Analysis
-4. Visual on Dashboard 
+## Research Questions
+
+What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie Sanders) popularity on Twitter?
+- How does this populrity change with current events? (Debates, tweets, impeachment trial, etc.)
+- Can we break this down to the state level?
+- If we can break this down to the state level, can we classify how a state will vote based on the sentimental analysis?
+
+## Process 
+
+1. Data Collection: Twitter API via Tweepy 
+2. Data Ingestion: AWS Kinesis Firehose
+3. Data Cleaning/Curation: AWS Lambda inside Kinesis Firehose
+4. Data Analysis: Sentimental Analysis via AWS Comprehend
+5. Data Storage: Elasticsearch
+6. Data Visualization: Kibana Dashboard
 
 ## Architecture
 
-![Week One Architecture](../images/week-one.jpg)
-
-## Research Question
-
-Can I use Twitter to determine a presidential candidates popularity?
+![Week One Architecture](../images/presentation-one.jpg)
 
 ## Planned Analyses
 
@@ -24,7 +31,7 @@ Can I use Twitter to determine a presidential candidates popularity?
 
 ## Data Descriptives
 
-Currently in a json file. Need to move to some dataframe.
+Currently stored in a json file. I have limited it to 
 
 ### Raw Data
 
@@ -39,10 +46,25 @@ The following is an example of the raw data after using the Twitter API
 The following is an example of the data after curation and sentimental analysis in the form of a json file
 
 ```
-{
+    {
         "message": "Donald Trump wants his impeachment trial to end before his state of the union address in just two weeks’ time, Lind… https://t.co/rwbiWYglRT",
         "sentiment": "NEUTRAL",
         "total": -0.09744752780534327
-    }
+    },
+    {
+        "message": "@realDonaldTrump Best President ever President Donald J Trump.",
+        "sentiment": "POSITIVE",
+        "total": 0.8768189063412137
+    },
+    {
+        "message": "Republicans know full well trump is guilty. They swore an oath and immediately broke it.",
+        "sentiment": "NEGATIVE",
+        "total": -0.862764734774828
+    },
+
+
 ```
 
+## Kibana Dashboard
+
+![Kibana Link](https://search-twitter-elasticsearch-hcicwk5gfmpfqsfxpehilnn2fa.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(_source),index:caebb9b0-411b-11ea-becf-5d43b827f041,interval:auto,query:(language:kuery,query:''),sort:!(_score,desc)))
