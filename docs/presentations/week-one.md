@@ -11,7 +11,7 @@ Present research question, data descriptives, analyses or planned analyses.
 
 ## Architecture
 
-![Week One Architecture](../week-one.jpg)
+![Week One Architecture](../images/week-one.jpg)
 
 ## Research Question
 
