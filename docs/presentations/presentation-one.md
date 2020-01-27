@@ -22,7 +22,7 @@ What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie San
 
 ## Architecture
 
-![Week One Architecture](../images/presentation-one.jpg)
+![Week One Architecture](../images/presentationgit -one.jpg)
 
 ## Planned Analyses
 
