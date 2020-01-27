@@ -64,7 +64,3 @@ The following is an example of the data after curation and sentimental analysis 
 
 
 ```
-
-## Kibana Dashboard
-
-![Kibana Link](https://search-twitter-elasticsearch-hcicwk5gfmpfqsfxpehilnn2fa.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana#/discover?_g=()&_a=(columns:!(_source),index:caebb9b0-411b-11ea-becf-5d43b827f041,interval:auto,query:(language:kuery,query:''),sort:!(_score,desc)))
