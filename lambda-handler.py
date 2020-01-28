@@ -3,16 +3,17 @@ import base64
 import json
 
 def lambda_handler(event, context):
+
     output = [] # Initialize output list
     for record in event['records']:
         # Coded in base64, Retrieve data
         tweet = base64.b64decode(record['data']).decode('utf-8').strip()
-        text = json.loads(tweet)["text"] # Get text
-        time = json.loads(tweet)["created_at"] # Get time of tweet
-        username = json.loads(tweet)["user"]["screenname"] # Get username for author of tweet
+        text = json.loads(tweet)["text"] 
+        time = json.loads(tweet)["created_at"] 
+        username = json.loads(tweet)["user"]["screenname"] 
         print(username)
 
-        # Using AWS Comprehend, classify message as postive or negative
+        # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
         sentiment_all = comprehend.detect_sentiment(Text=text, LanguageCode='en')
         sentiment = sentiment_all['Sentiment']

@@ -6,8 +6,8 @@ Present research question, data descriptives, analyses or planned analyses.
 
 ## Research Questions
 
-What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie Sanders) popularity on Twitter?
-- How does this populrity change with current events? (Debates, tweets, impeachment trial, etc.)
+What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie Sanders, etc.) popularity on Twitter?
+- How does this popularity change with current events? (debates, tweets, impeachment trial, etc.)
 - Can we break this down to the state level?
 - If we can break this down to the state level, can we classify how a state will vote based on the sentimental analysis?
 

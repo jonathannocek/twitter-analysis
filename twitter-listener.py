@@ -24,12 +24,11 @@ class MyStreamListener(tweepy.StreamListener):
         print("You're connected to the streaming server.")
 
     def on_data(self, data):
-        # If the status is not retweeted
+        # Exclude retweets
         if (not json.loads(data)['retweeted']) and ('RT @' not in json.loads(data)["text"]):
             # Filter for tweets that contain 'Trump'
             if('Trump' in json.loads(data)["text"]):
-                # Put data in AWS Firehose stream
-                client.put_record(DeliveryStreamName=streamName,Record={'Data':data}) #json.loads(data)["text"]
+                client.put_record(DeliveryStreamName=streamName,Record={'Data':data}) 
                 print(json.loads(data)["text"])
 
         return True
