@@ -9,7 +9,7 @@ import credentials
 auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
 auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 
-streamName = 'twitter-stream'
+streamName = 'test-stream'
 
 # Authenticate with AWS
 client = boto3.client('firehose', region_name='us-east-1',
@@ -19,12 +19,17 @@ client = boto3.client('firehose', region_name='us-east-1',
 api = tweepy.API(auth)
 
 class MyStreamListener(tweepy.StreamListener):
+    def on_connect(self):
+        # Connection confirmation 
+        print("You're connected to the streaming server.")
+
     def on_data(self, data):
         # If the status is not retweeted
         if (not json.loads(data)['retweeted']) and ('RT @' not in json.loads(data)["text"]):
-            # Put data in AWS Firehose stream
-            client.put_record(DeliveryStreamName=streamName,Record={'Data': json.loads(data)['text']})
-            print(json.loads(data)["text"])
+            if('Trump' in json.loads(data)["text"]):
+                # Put data in AWS Firehose stream
+                client.put_record(DeliveryStreamName=streamName,Record={'Data':data})
+                print(json.loads(data)["text"])
 
         return True
 
@@ -43,5 +48,10 @@ if __name__ == '__main__':
     auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
     auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 
+    # Locations: Longitude and Latitude coordinates for where the tweets will be streamed.
+    # First two are southwest corner and the second two are the northeast corner.
+    locations = [-124.7771694, 24.520833, -66.947028, 49.384472,        # Contiguous US
+                 -164.639405, 58.806859, -144.152365, 71.76871,         # Alaska
+                 -160.161542, 18.776344, -154.641396, 22.878623]        # Hawaii
     stream = tweepy.Stream(auth, listener)
-    stream.filter(track=['donald trump'])
+    stream.filter(locations=locations) 
