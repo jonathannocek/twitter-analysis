@@ -17,8 +17,9 @@ client = boto3.client('firehose', region_name='us-east-1',
 api = tweepy.API(auth)
 
 # Name for AWS Kinesis Firehose stream
-streamName = 'test-stream'
+streamName = 'twitter-stream'
 
+#override tweepy.StreamListener to add logic
 class MyStreamListener(tweepy.StreamListener):
     def on_connect(self):
         print("You're connected to the streaming server.")

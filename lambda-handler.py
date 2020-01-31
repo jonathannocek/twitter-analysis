@@ -10,8 +10,8 @@ def lambda_handler(event, context):
         tweet = base64.b64decode(record['data']).decode('utf-8').strip()
         text = json.loads(tweet)["text"] 
         time = json.loads(tweet)["created_at"] 
-        username = json.loads(tweet)["user"]["screenname"] 
-        print(username)
+        username = json.loads(tweet)["user"]["screen_name"]
+        location = json.loads(tweet)['place']['full_name']
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
@@ -30,7 +30,8 @@ def lambda_handler(event, context):
             'sentiment': sentiment,
             'score': score,
             'time': time,
-            'username': username
+            'username': username,
+            'location': location
         }
         print(data_record)
         

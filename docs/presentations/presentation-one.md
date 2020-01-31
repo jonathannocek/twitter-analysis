@@ -2,8 +2,6 @@
 
 Present research question, data descriptives, analyses or planned analyses.
 
-## Overview
-
 ## Research Questions
 
 What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie Sanders, etc.) popularity on Twitter?
