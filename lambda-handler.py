@@ -1,6 +1,7 @@
 import boto3
 import base64
 import json
+import time
 
 def lambda_handler(event, context):
 
@@ -9,9 +10,20 @@ def lambda_handler(event, context):
         # Coded in base64, Retrieve data
         tweet = base64.b64decode(record['data']).decode('utf-8').strip()
         text = json.loads(tweet)["text"] 
-        time = json.loads(tweet)["created_at"] 
         username = json.loads(tweet)["user"]["screen_name"]
-        location = json.loads(tweet)['place']['full_name']
+        
+        created_at = json.loads(tweet)["created_at"] 
+        date_raw = time.strftime('%Y-%m-%d,%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
+        date_list = [x.strip() for x in date_raw.split(',')]
+        date = date_list[0]
+        hour = date_list[1]
+
+
+        # Get city, state
+        location_raw = json.loads(tweet)['place']['full_name']
+        location = [x.strip() for x in location_raw.split(', ')]
+        city = location[0]
+        state = location[1]
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
@@ -29,9 +41,11 @@ def lambda_handler(event, context):
             'text': text,
             'sentiment': sentiment,
             'score': score,
-            'time': time,
+            'date': date,
+            'hour': hour,
             'username': username,
-            'location': location
+            'city': city,
+            'state': state
         }
         print(data_record)
         
