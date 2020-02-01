@@ -12,11 +12,9 @@ def lambda_handler(event, context):
         text = json.loads(tweet)["text"] 
         username = json.loads(tweet)["user"]["screen_name"]
         
+        # Format datetime so Kibana reads it
         created_at = json.loads(tweet)["created_at"] 
-        date_raw = time.strftime('%Y-%m-%d,%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
-        date_list = [x.strip() for x in date_raw.split(',')]
-        date = date_list[0]
-        hour = date_list[1]
+        datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
 
         # Get city, state
@@ -41,8 +39,7 @@ def lambda_handler(event, context):
             'text': text,
             'sentiment': sentiment,
             'score': score,
-            'date': date,
-            'hour': hour,
+            'datetime': datetime,
             'username': username,
             'city': city,
             'state': state
