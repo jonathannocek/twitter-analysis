@@ -2,6 +2,7 @@ import boto3
 import base64
 import json
 import time
+# These packages needs to be added as layers to Lambda:
 import geopy
 
 def lambda_handler(event, context):
@@ -25,9 +26,9 @@ def lambda_handler(event, context):
 
         # Using geopy to determine lat/long based on city, state
         locator = geopy.Nominatim(user_agent ='myGeocode')
-        location = locator.geocode(location_raw)
-        latitude = location.latitude
-        longitude = location.longitude
+        position = locator.geocode(location_raw)
+        latitude = position.latitude
+        longitude = position.longitude
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
