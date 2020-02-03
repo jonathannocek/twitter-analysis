@@ -12,6 +12,27 @@ tweets containing 'Trump' and learned that there were approximately 10 tweets pe
 
 ![System Design as of 02-03-2020](../images/presentation-two.jpg)
 
+## Example Output
+
+From last week, I have expanded the data being outputted and sent to Kiban. Here is an example entry:
+```
+{
+        "text": "so today i hit a Trump supporter in a car that wasn’t mine and i’ve never been more stressed🥵😭",
+        "sentiment": "NEGATIVE",
+        "score": -0.5409159101545811,
+        "datetime": "2020-02-03T14:43:46",
+        "username": "maddiwood1301",
+        "place" : {
+            "city": "New Orleans",
+            "state": "LA"
+        },
+        "location" : {
+            "latitude": 29.9499323,
+            "longitude": -90.0701156
+        }
+    },
+```
+
 
 ## Research Question
 

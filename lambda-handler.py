@@ -19,16 +19,16 @@ def lambda_handler(event, context):
         datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
         # Get city, state
-        location_raw = json.loads(tweet)['place']['full_name']
-        location = [x.strip() for x in location_raw.split(', ')]
-        city = location[0]
-        state = location[1]
+        place_raw = json.loads(tweet)['place']['full_name']
+        place = [x.strip() for x in place_raw.split(', ')]
+        city = place[0]
+        state = place[1]
 
         # Using geopy to determine lat/long based on city, state
         locator = geopy.Nominatim(user_agent ='myGeocode')
-        position = locator.geocode(location_raw)
-        latitude = position.latitude
-        longitude = position.longitude
+        location = locator.geocode(place_raw)
+        latitude = location.latitude
+        longitude = location.longitude
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
@@ -48,10 +48,15 @@ def lambda_handler(event, context):
             'score': score,
             'datetime': datetime,
             'username': username,
-            'city': city,
-            'state': state,
-            'latitude': latitude,
-            'longitude': longitude
+            'place' : {
+                'city': city,
+                'state': state,
+            },
+            'location' : {
+                'lat': latitude,
+                'lon': longitude
+            }
+            
         }
         print(data_record)
         
