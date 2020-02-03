@@ -2,6 +2,7 @@ import boto3
 import base64
 import json
 import time
+import geopy
 
 def lambda_handler(event, context):
 
@@ -16,12 +17,17 @@ def lambda_handler(event, context):
         created_at = json.loads(tweet)["created_at"] 
         datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
-
         # Get city, state
         location_raw = json.loads(tweet)['place']['full_name']
         location = [x.strip() for x in location_raw.split(', ')]
         city = location[0]
         state = location[1]
+
+        # Using geopy to determine lat/long based on city, state
+        locator = geopy.Nominatim(user_agent ='myGeocode')
+        location = locator.geocode(location_raw)
+        latitude = location.latitude
+        longitude = location.longitude
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
@@ -42,7 +48,9 @@ def lambda_handler(event, context):
             'datetime': datetime,
             'username': username,
             'city': city,
-            'state': state
+            'state': state,
+            'latitude': latitude,
+            'longitude': longitude
         }
         print(data_record)
         
