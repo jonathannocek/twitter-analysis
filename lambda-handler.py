@@ -52,11 +52,7 @@ def lambda_handler(event, context):
                 'city': city,
                 'state': state,
             },
-            'location' : {
-                'lat': latitude,
-                'lon': longitude
-            }
-            
+            'location' : [latitude,longitude]
         }
         print(data_record)
         
