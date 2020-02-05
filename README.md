@@ -24,6 +24,10 @@ This is a project for DS395 at Illinois Wesleyan University during the 2020 Spri
 - Amazon Elasticsearch service: Fully managed service that deploys, secures, and runs Elasticsearch
 - Kibana: Open source analytics and visualizations platform designed to work with Elasticsearch
 
-## Kibana Example
+## Kibana Examples
 
-![Design](docs/images/kibana_example_1.png)
+![Kibana Dashboard](docs/images/kibana_example_1.png)
+
+![Kibana Dashboard](docs/images/kibana_example_2.png)
+
+
