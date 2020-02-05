@@ -23,3 +23,7 @@ This is a project for DS395 at Illinois Wesleyan University during the 2020 Spri
 - AWS Comprehend: Natural Language Processing (NLP) services that uses machine learning to find insights and relationships in text
 - Amazon Elasticsearch service: Fully managed service that deploys, secures, and runs Elasticsearch
 - Kibana: Open source analytics and visualizations platform designed to work with Elasticsearch
+
+## Kibana Example
+
+![Design](docs/images/kibana_example_1.png)
