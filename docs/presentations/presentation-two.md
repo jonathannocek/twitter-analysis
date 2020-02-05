@@ -4,7 +4,7 @@
 
 The pipeline has been connected to the Kibana example. 
 
-![Kibana Example](../images/kibana-example_1.png)
+![Kibana Example](../images/kibana_example_1.png)
 
 ## System Design
 
