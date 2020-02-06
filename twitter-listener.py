@@ -9,12 +9,12 @@ import credentials
 auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
 auth.set_access_token(credentials.access_token, credentials.access_token_secret)
 
+api = tweepy.API(auth)
+
 # Authenticate with AWS
 client = boto3.client('firehose', region_name='us-east-1',
                           aws_access_key_id=credentials.aws_access_key_id,
                           aws_secret_access_key=credentials.aws_secret_access_key)
-
-api = tweepy.API(auth)
 
 # Name for AWS Kinesis Firehose stream
 streamName = 'twitter-stream'
@@ -42,7 +42,6 @@ class MyStreamListener(tweepy.StreamListener):
             #returning False if on_error disconnects the stream
             return False
 
-
 if __name__ == '__main__':
 
     listener = MyStreamListener()
@@ -57,3 +56,4 @@ if __name__ == '__main__':
     stream = tweepy.Stream(auth, listener)
     # Filter by location and tweets in English
     stream.filter(locations=locations) 
+     
