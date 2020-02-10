@@ -32,6 +32,6 @@ This is a project for DS395 at Illinois Wesleyan University during the 2020 Spri
 
 ## Author
 
-Jonathan Nocek
+- Jonathan Nocek - *jnocek@iwu.edu*
 
 
