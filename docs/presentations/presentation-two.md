@@ -1,15 +1,6 @@
 # Presentation 2: Week of January 26th
 
-## Current State
 
-Right now, the pipeline is functioning. I currently can launch an EC2 to listen to any tweets conatining a certain string,
-then it will put into the data stream, ran through the lambda, and finally placed into Elasticsearch to be used in Kibana.
-
-![Kibana Example](../images/kibana_example_1.png)
-
-## System Design
-
-![System Design as of 02-03-2020](../images/presentation-two.jpg)
 
 ## Example Output
 
@@ -28,6 +19,13 @@ From last week, I have expanded the data being outputted and sent to Kibana. Her
         "location" : [29.9499323, -90.0701156]
     },
 ```
+
+## Current State
+
+Right now, the pipeline is functioning. I currently can launch an EC2 to listen to any tweets conatining a certain string,
+then it will put into the data stream, ran through the lambda, and finally placed into Elasticsearch to be used in Kibana.
+
+![Kibana Example](../images/kibana_example_2.png)
 
 ## Basic Analysis
 
@@ -53,5 +51,5 @@ How popular are the 2020 Presidential candidates on Twitter?
 
 Other ideas:
 
-- Potentially rethink research question: Use k-means clustering and machine learning to create recoomendation
+- Potentially rethink research question: Use k-means clustering and machine learning to create recommendations
 - Determine which words are the best predictors of a good tweet and which words are the best predictors of a negative tweet

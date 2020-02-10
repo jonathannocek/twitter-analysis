@@ -3,3 +3,6 @@ credentials.py
 
 # folders
 __pycache__
+
+# ec2 script
+docs/script.ssh
