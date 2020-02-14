@@ -1,7 +1,5 @@
 # Presentation 2: Week of January 26th
 
-
-
 ## Example Output
 
 From last week, I have expanded the data being outputted and sent to Kibana. Here is an example entry:

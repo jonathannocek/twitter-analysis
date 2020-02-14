@@ -32,20 +32,26 @@ def lambda_handler(event, context):
 
         # Using AWS Comprehend, classify message as postive or negative using sentimental analysis
         comprehend = boto3.client(service_name='comprehend', region_name='us-east-1')
-        sentiment_all = comprehend.detect_sentiment(Text=text, LanguageCode='en')
-        sentiment = sentiment_all['Sentiment']
-        print(sentiment)
+        sentiment = comprehend.detect_sentiment(Text=text, LanguageCode='en')
+        s = sentiment['Sentiment']
+        print(s)
+
+        # Using AWS Comprehend, detect key phrases
+        phrases = comprehend.detect_key_phrases(Text=text, LanguageCode='en')
+        p = phrases['KeyPhrases']
+        print(p)
 
         # Retrieve positive, negative scores. Subtract to find total score
-        positive = sentiment_all['SentimentScore']['Positive']
-        negative = sentiment_all['SentimentScore']['Negative']
+        positive = sentiment['SentimentScore']['Positive']
+        negative = sentiment['SentimentScore']['Negative']
         score = positive - negative
         print(score)
         
         data_record = {
             'text': text,
-            'sentiment': sentiment,
+            'sentiment': s,
             'score': score,
+            'phrases': p,
             'datetime': datetime,
             'username': username,
             'place' : {
