@@ -9,6 +9,7 @@ A list of potential improvements for this week:
 - Find negative tweets
     - Run them through sytax api to find nouns or topics being discussed
 - Add Amazon cognito and host dashboard
+- Add S3 bucket for failed records into the architecture diagram
 
 
 

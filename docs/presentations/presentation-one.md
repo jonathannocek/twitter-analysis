@@ -18,10 +18,6 @@ What is Donald Trump's and potential Democratic nominees' (Joe Biden, Bernie San
 5. Data Storage: Elasticsearch
 6. Data Visualization: Kibana Dashboard
 
-## Architecture
-
-![Week One Architecture](../images/presentation-one.jpg)
-
 ### Raw Data
 
 The following is an example of the raw data after using the Twitter API
