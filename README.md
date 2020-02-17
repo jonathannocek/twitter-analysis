@@ -30,7 +30,7 @@ This is a project for DS395 at Illinois Wesleyan University during the 2020 Spri
 
 ![Kibana Dashboard](docs/images/kibana_example_2.png)
 
-![Kibana Link](https://search-twitter-elasticsearch-hcicwk5gfmpfqsfxpehilnn2fa.us-east-1.es.amazonaws.com/_plugin/kibana/)
+[Kibana Link](https://search-twitter-elasticsearch-hcicwk5gfmpfqsfxpehilnn2fa.us-east-1.es.amazonaws.com/_plugin/kibana/)
 
 ## Author
 
