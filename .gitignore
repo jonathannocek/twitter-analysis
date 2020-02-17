@@ -5,7 +5,7 @@ credentials.py
 __pycache__
 
 # ec2 script
-docs/script.ssh
+docs/script.txt
 
 # .DS_Store
 .DS_Store

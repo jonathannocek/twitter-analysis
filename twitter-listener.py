@@ -53,7 +53,8 @@ if __name__ == '__main__':
     locations = [-124.7771694, 24.520833, -66.947028, 49.384472,        # Contiguous US
                  -164.639405, 58.806859, -144.152365, 71.76871,         # Alaska
                  -160.161542, 18.776344, -154.641396, 22.878623]        # Hawaii
+
     stream = tweepy.Stream(auth, listener)
-    # Filter by location and tweets in English
+    # Filter by location
     stream.filter(locations=locations) 
      
