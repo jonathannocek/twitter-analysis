@@ -28,7 +28,7 @@ class MyStreamListener(tweepy.StreamListener):
         # Exclude retweets
         if (not json.loads(data)['retweeted']) and ('RT @' not in json.loads(data)["text"]):
             # Filter for tweets that contain 'Trump'
-            if('Trump' in json.loads(data)["text"]):
+            if('Tesla' in json.loads(data)["text"]):
                 client.put_record(DeliveryStreamName=streamName,Record={'Data':data}) 
                 print(json.loads(data)["text"])
 
