@@ -3,14 +3,15 @@ import credentials
 import geopy
 import time
 import os
+import json
 
 def search(query):
     try:
         tso = TwitterSearch.TwitterSearchOrder() # create a TwitterSearchOrder object
-        tso.set_keywords(['Elon Musk']) # let's define all words we would like to have a look for
+        tso.set_keywords(query) # let's define all words we would like to have a look for
         tso.set_language('en') # we want to see English tweets only
         tso.set_include_entities(False) # and don't give us all those entity information
-
+        
         # it's about time to create a TwitterSearch object with our secret tokens
         ts = TwitterSearch.TwitterSearch(
             consumer_key = credentials.consumer_key,
@@ -18,6 +19,9 @@ def search(query):
             access_token = credentials.access_token,
             access_token_secret = credentials.access_token_secret
         )
+
+        # Initialize output
+        output = [] 
 
         # this is where the fun actually starts :)
         for tweet in ts.search_tweets_iterable(tso):
@@ -27,29 +31,22 @@ def search(query):
             created_at = tweet["created_at"] 
             datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
-            # Get city, state
-            place_raw = tweet['place']['full_name']
-            place = [x.strip() for x in place_raw.split(', ')]
-            city = place[0]
-            state = place[1]
-
-            # Using geopy to determine lat/long based on city, state
-            locator = geopy.Nominatim(user_agent ='myGeocode')
-            location = locator.geocode(place_raw)
-            latitude = location.latitude
-            longitude = location.longitude
-
-            data_record = {
+            data = {
             'text': text,
             'datetime': datetime,
-            'username': username,
-            'place' : {
-                'city': city,
-                'state': state,
-            },
-            'location' : [longitude,latitude]
-        }
+            'username': username
+            }
+            
+            output.append(data)
+
+        with open('data.json', 'w') as f:
+            json.dump(output, f)
+
 
 
     except TwitterSearch.TwitterSearchException as e: 
         print(e)
+
+if __name__ == '__main__':
+    query = ['Elon Musk','-filter:retweets', '-filter:replies']
+    search(query)
