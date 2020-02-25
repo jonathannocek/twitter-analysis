@@ -2,8 +2,8 @@ import TwitterSearch
 import credentials
 import geopy
 import time
-import os
 import json
+import textblob
 
 def search(query):
     try:
@@ -44,6 +44,26 @@ def search(query):
     except TwitterSearch.TwitterSearchException as e: 
         print(e)
 
+def train_model():
+    '''
+    Trains a natural language processing model using the following data:
+    https://pythonprogramming.net/static/downloads/short_reviews/positive.txt
+    '''
+    training_data = [] # Initialize list
+    with open("train/positive.txt","r") as f:
+        for line in f.read().split('\n'):
+            classify = {
+                'text': line,
+                'label': 'pos'
+            }
+            training_data.append(classify)
+    with open("train/negative.txt","r") as f:
+        for line in f.read().split('\n'):
+            classify = {
+                'text': line,
+                'label': 'neg'
+            }
+
+
 if __name__ == '__main__':
     query = ['Elon Musk','-filter:retweets', '-filter:replies']
-    search(query)
