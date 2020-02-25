@@ -4,34 +4,35 @@ import geopy
 import time
 import json
 import textblob
+from textblob.classifiers import NaiveBayesClassifier
 
 def search(query):
     try:
-        tso = TwitterSearch.TwitterSearchOrder() # create a TwitterSearchOrder object
-        tso.set_keywords(query) 
-        tso.set_language('en') # we want to see English tweets only
-        tso.set_include_entities(False) # and don't give us all those entity information
-        
-        ts = TwitterSearch.TwitterSearch(
-            consumer_key = credentials.consumer_key,
-            consumer_secret = credentials.consumer_secret,
-            access_token = credentials.access_token,
-            access_token_secret = credentials.access_token_secret
-        )
+        tso = get_twitter_search_object()
+        ts = connect_to_twitter_search()
 
         # Initialize output
         output = [] 
 
+        # Create Naive Bayes NLP Sentiment model
+        training_data = gather_training_data()
+        naive_bayes = NaiveBayesClassifier(training_data)
+
         for tweet in ts.search_tweets_iterable(tso):
-            text = tweet['text']
+            text = tweet['full_text']
             username = tweet["user"]["screen_name"]
             created_at = tweet["created_at"] 
             datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
+            blob = textblob.TextBlob(text, classifier=naive_bayes)
+            sentiment = blob.classify()
+            print(sentiment)
+
             data = {
             'text': text,
             'datetime': datetime,
-            'username': username
+            'username': username,
+            'sentiment': sentiment
             }
             
             output.append(data)
@@ -39,31 +40,48 @@ def search(query):
         with open('data.json', 'w') as f:
             json.dump(output, f)
 
-
-
     except TwitterSearch.TwitterSearchException as e: 
         print(e)
 
-def train_model():
+
+
+def gather_training_data():
     '''
     Trains a natural language processing model using the following data:
     https://pythonprogramming.net/static/downloads/short_reviews/positive.txt
+    https://pythonprogramming.net/static/downloads/short_reviews/negative.txt
     '''
     training_data = [] # Initialize list
     with open("train/positive.txt","r") as f:
         for line in f.read().split('\n'):
-            classify = {
-                'text': line,
-                'label': 'pos'
-            }
+            classify = (line, 'pos')
             training_data.append(classify)
     with open("train/negative.txt","r") as f:
         for line in f.read().split('\n'):
-            classify = {
-                'text': line,
-                'label': 'neg'
-            }
+            classify = (line, 'neg')
+            training_data.append(classify)
+    return training_data
 
+
+def get_twitter_search_object():
+    tso = TwitterSearch.TwitterSearchOrder() # create a TwitterSearchOrder object
+    tso.set_keywords(query) 
+    tso.set_language('en') # we want to see English tweets only
+    tso.set_include_entities(False) # and don't give us all those entity information
+    tso.arguments.update({'tweet_mode':'extended'})
+    return(tso)
+
+
+def connect_to_twitter_search():
+    ts = TwitterSearch.TwitterSearch(
+        consumer_key = credentials.consumer_key,
+        consumer_secret = credentials.consumer_secret,
+        access_token = credentials.access_token,
+        access_token_secret = credentials.access_token_secret
+    )
+    return(ts)
 
 if __name__ == '__main__':
+    # Search for tweet containing 'Elon Musk' w/ no retweets or replies
     query = ['Elon Musk','-filter:retweets', '-filter:replies']
+    search(query)
