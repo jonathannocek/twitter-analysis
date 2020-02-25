@@ -64,6 +64,9 @@ def gather_training_data():
 
 
 def get_twitter_search_object():
+    '''
+    Creates TwitterSearchOrder object from TwitterSearch and returns it
+    '''
     tso = TwitterSearch.TwitterSearchOrder() # create a TwitterSearchOrder object
     tso.set_keywords(query) 
     tso.set_language('en') # we want to see English tweets only
@@ -73,6 +76,9 @@ def get_twitter_search_object():
 
 
 def connect_to_twitter_search():
+    '''
+    Connects to Twitter API using private keys
+    '''
     ts = TwitterSearch.TwitterSearch(
         consumer_key = credentials.consumer_key,
         consumer_secret = credentials.consumer_secret,
