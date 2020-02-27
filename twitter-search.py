@@ -26,13 +26,24 @@ def search(query):
 
             blob = textblob.TextBlob(text, classifier=naive_bayes)
             sentiment = blob.classify()
-            print(sentiment)
+
+            followers = tweet['user']['followers_count']
+
+            quotes = tweet['quote_count']
+            replies = tweet['reply_count']
+            favorites = tweet['favorite_count']
+            retweets = tweet['retweet_count']
 
             data = {
             'text': text,
             'datetime': datetime,
             'username': username,
-            'sentiment': sentiment
+            'followers': followers,
+            'sentiment': sentiment,
+            'quotes': quotes,
+            'replies': replies,
+            'favorites': favorites,
+            'retweets': retweets
             }
             
             output.append(data)
