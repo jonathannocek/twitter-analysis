@@ -16,7 +16,7 @@ def search(query):
 
         # Create Naive Bayes NLP Sentiment model
         training_data = gather_training_data()
-        naive_bayes = NaiveBayesClassifier(training_data)
+        classifier = NaiveBayesClassifier(training_data)
 
         for tweet in ts.search_tweets_iterable(tso):
             text = tweet['full_text']
@@ -24,7 +24,7 @@ def search(query):
             created_at = tweet["created_at"] 
             datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y'))
 
-            blob = textblob.TextBlob(text, classifier=naive_bayes)
+            blob = textblob.TextBlob(text, classifier=classifier)
             sentiment = blob.classify()
 
             followers = tweet['user']['followers_count']
