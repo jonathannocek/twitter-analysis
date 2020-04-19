@@ -11,3 +11,9 @@ docs/script.txt
 .DS_Store
 docs/.DS_Store
 docs/images/.DS_Store
+
+# Twitter Search
+twitter-search.py
+
+# notebook
+twitter-analysis.ipynb
