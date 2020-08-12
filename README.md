@@ -9,10 +9,6 @@ the results in a Kibana dashboard. The Twitter data is filtered by a query word 
 - How to connect these services on AWS
 - API Integration with Tweepy
 
-## Background
-
-This is a project for DS395 at Illinois Wesleyan University during the 2020 Spring semester. This course finishes the Data Science minor by having students do a independent study Capstone project that will be presented during the John Wesley Powell conference at the end of the semester. This project aims to provide analysis around the 2020 Democratic primaries and General Election.
-
 ## Design
 
 ![Design](docs/images/design.jpg)
