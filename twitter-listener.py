@@ -20,7 +20,7 @@ client = boto3.client(
 )
 
 # Name for AWS Kinesis Firehose stream
-streamName = "twitter-stream"
+stream_name = "twitter-stream"
 
 # override tweepy.StreamListener to add logic
 class MyStreamListener(tweepy.StreamListener):
@@ -32,9 +32,10 @@ class MyStreamListener(tweepy.StreamListener):
         if (not json.loads(data)["retweeted"]) and (
             "RT @" not in json.loads(data)["text"]
         ):
-            # Filter for tweets that contain 'Trump'
-            if "Coronavirus" in json.loads(data)["text"]:
-                client.put_record(DeliveryStreamName=streamName, Record={"Data": data})
+            # Filter for tweets that contain 'Coronavirus'
+            key_word = "Coronavirus"
+            if key_word in json.loads(data)["text"]:
+                client.put_record(DeliveryStreamName=stream_name, Record={"Data": data})
                 print(json.loads(data)["text"])
 
         return True
@@ -72,5 +73,5 @@ if __name__ == "__main__":
     ]  # Hawaii
 
     stream = tweepy.Stream(auth, listener)
-    # Filter by location
+    # Filter for location in the US
     stream.filter(locations=locations)
