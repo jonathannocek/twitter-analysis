@@ -38,18 +38,15 @@ def lambda_handler(event, context):
         comprehend = boto3.client(service_name="comprehend", region_name="us-east-1")
         sentiment = comprehend.detect_sentiment(Text=text, LanguageCode="en")
         s = sentiment["Sentiment"]
-        print(s)
 
         # Using AWS Comprehend, detect key phrases
         phrases = comprehend.detect_key_phrases(Text=text, LanguageCode="en")
         p = phrases["KeyPhrases"]
-        print(p)
 
         # Retrieve positive, negative scores. Subtract to find total score
         positive = sentiment["SentimentScore"]["Positive"]
         negative = sentiment["SentimentScore"]["Negative"]
         score = positive - negative
-        print(score)
 
         data_record = {
             "text": text,
@@ -61,7 +58,6 @@ def lambda_handler(event, context):
             "place": {"city": city, "state": state,},
             "location": [longitude, latitude],
         }
-        print(data_record)
 
         output_record = {
             "recordId": record["recordId"],
@@ -70,8 +66,6 @@ def lambda_handler(event, context):
                 "utf-8"
             ),
         }
-        print(output_record)
         output.append(output_record)
 
-    print(output)
     return {"records": output}
